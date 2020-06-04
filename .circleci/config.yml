@@ -1,9 +1,56 @@
 version: 2.1
 jobs:
-  create:
-    docker:
-      - image: circleci/python:3
-    steps:
-      - checkout
-      - run: echo "creating vpc..."
-      - run:
+   DeployDevelop:
+     docker:
+       - image: circleci/python:3
+     steps:
+       - checkout
+       - run: echo "start prepare envirement..."
+       - run:
+           name: prepareEnv
+           command: |
+             sudo apt update
+             sudo apt install nodejs
+             node --version
+             npm install -g @angular/cli
+             ng --version
+
+
+   approval:
+     docker:
+       - image: circleci/python:3
+     steps:
+       - run: echo "You wanna destroy it?"
+   destroy:
+     docker:
+       - image: circleci/python:3
+     steps:
+       - checkout
+       - attach_workspace:
+           at: /tmp/workspace
+       - run: cat /tmp/workspace/artifects/output.status
+       - run:
+           name: destroy
+           command: |
+             sudo apt update
+             sudo apt install -y python3-pip jq
+             sudo pip3 install awscli
+             echo ${AWS_ACCESS_KEY_ID}
+             echo ${AWS_SECRET_ACCESS_KEY}
+
+             bash ./manage_vpc.sh destroy
+
+workflows:
+   operate-vpc:
+     jobs:
+       - create:
+           name: create
+           context: DevContext
+       - approval:
+           type: approval
+           requires:
+             - create
+       - destroy:
+           context: DevContext
+           requires:
+             - approval
