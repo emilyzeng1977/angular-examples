@@ -10,6 +10,7 @@ jobs:
            name: prepareEnv
            command: |
              sudo apt update
+             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
              sudo apt install nodejs
              node --version
              npm install -g @angular/cli
