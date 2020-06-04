@@ -43,8 +43,8 @@ jobs:
 workflows:
    DeployDevelop:
      jobs:
-       - prepareEnv:
-           name: prepareEnv1
+       - DeployDevelop:
+           name: prepareEnv123
        - approval:
            type: approval
            requires:
