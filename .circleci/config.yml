@@ -14,8 +14,7 @@ jobs:
              sudo apt install nodejs
              node --version
              npm --version
-             export NG_CLI_ANALYTICS=ci
-             sudo npm install -y -g @angular/cli
+             sudo npm install -g @angular/cli > /dev/null
              ng --version
 
 
