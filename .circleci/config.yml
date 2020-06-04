@@ -41,11 +41,10 @@ jobs:
              bash ./manage_vpc.sh destroy
 
 workflows:
-   operate-vpc:
+   DeployDevelop:
      jobs:
-       - create:
-           name: create
-           context: DevContext
+       - prepareEnv1:
+           name: prepareEnv
        - approval:
            type: approval
            requires:
