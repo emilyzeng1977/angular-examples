@@ -45,11 +45,4 @@ workflows:
      jobs:
        - DeployDevelop:
            name: DeployDevelop
-       - approval:
-           type: approval
-           requires:
-             - create
-       - destroy:
-           context: DevContext
-           requires:
-             - approval
+
