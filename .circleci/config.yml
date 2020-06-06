@@ -5,17 +5,14 @@ jobs:
        - image: circleci/python:3
 
      environment:
-       GITHUB_TOKEN: "17e396315d1e9961cbaa46afd2f100257990555"
+       GIT_CREDENTIALS: "emilyzeng1977:nyz931644"
      steps:
        - checkout
        - run: echo "start prepare envirement..."
        - run:
            name: prepareEnv
            command: |
-             echo $GITHUB_TOKEN
-             export GITHUB_TOKEN=${GITHUB_TOKEN}"7"
-             export GH_TOKEN=${GITHUB_TOKEN}
-             echo $GITHUB_TOKEN
+             echo $GIT_CREDENTIALS
              sudo apt update
              curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
              sudo apt install nodejs
