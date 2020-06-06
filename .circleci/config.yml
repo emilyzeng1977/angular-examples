@@ -14,9 +14,8 @@ jobs:
              sudo apt install nodejs
              node --version
              npm --version
-             sudo npm install -g @angular/cli > /dev/null
-             ng --version
-
+             cd bookStore
+             ls
 
    approval:
      docker:
