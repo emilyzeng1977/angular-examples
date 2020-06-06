@@ -5,7 +5,6 @@ jobs:
        - image: circleci/python:3
 
      environment:
-       GH_TOKEN: 17e396315d1e9961cbaa46afd2f100257990555
        SSL_PASSPHRASE: nyz931644
        REPO_ENC_KEY: 7CED24AF8D9A1B136E031B84E3CD107CE13DB161B9F3BDAD69EC00B4D23B3CE0
        REPO_ENC_IV: 1C3FEA072C745F8BD53629F4B7CAB091
@@ -15,8 +14,6 @@ jobs:
        - run:
            name: prepareEnv
            command: |
-             echo $GITHUB_TOKEN
-             export GITHUB_TOKEN=${GITHUB_TOKEN}"7"
              openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
              chmod 600 /tmp/git_deploy_key
              echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
