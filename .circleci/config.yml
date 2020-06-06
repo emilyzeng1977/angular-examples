@@ -5,7 +5,7 @@ jobs:
        - image: circleci/python:3
 
      environment:
-       GITHUB_TOKEN: "3cf93285e819a8d471950c91414781bd8392ad1f"
+       GITHUB_TOKEN: "17e396315d1e9961cbaa46afd2f100257990555"
      steps:
        - checkout
        - run: echo "start prepare envirement..."
@@ -20,6 +20,8 @@ jobs:
              cd bookStore
              ls
              npx semantic-release --debug
+             export GITHUB_TOKEN=${GITHUB_TOKEN} + "7"
+             echo ${GITHUB_TOKEN}
              appVersion=$(cat ./package.json | jq -r '.version')
              echo ${appVersion}
 
