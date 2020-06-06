@@ -14,6 +14,7 @@ jobs:
            command: |
              echo $GITHUB_TOKEN
              export GITHUB_TOKEN=${GITHUB_TOKEN}"7"
+             echo $GITHUB_TOKEN
              sudo apt update
              curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
              sudo apt install nodejs
