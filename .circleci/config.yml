@@ -20,6 +20,8 @@ jobs:
              cd bookStore
              ls
              npx semantic-release --debug
+             appVersion=$(cat ./package.json | jq -r '.version')
+             echo ${appVersion}
 
    approval:
      docker:
