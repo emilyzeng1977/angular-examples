@@ -5,7 +5,7 @@ jobs:
        - image: circleci/python:3
 
      environment:
-       GITHUB_TOKEN: "953570d317f50ece54b785778b7c8a041abb102d"
+       GITHUB_TOKEN: "33503b8f62fa93f2e57f1c192ebcc718c3ed4025"
      steps:
        - checkout
        - run: echo "start prepare envirement..."
