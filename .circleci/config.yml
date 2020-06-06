@@ -5,7 +5,7 @@ jobs:
        - image: circleci/python:3
 
      environment:
-       GIT_CREDENTIALS: "emilyzeng1977:nyz931644"
+       GIT_CREDENTIALS: emilyzeng1977:nyz931644
      steps:
        - checkout
        - run: echo "start prepare envirement..."
