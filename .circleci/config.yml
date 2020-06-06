@@ -3,6 +3,9 @@ jobs:
    DeployDevelop:
      docker:
        - image: circleci/python:3
+
+     environment:
+       GITHUB_TOKEN: "953570d317f50ece54b785778b7c8a041abb102d"
      steps:
        - checkout
        - run: echo "start prepare envirement..."
@@ -16,6 +19,7 @@ jobs:
              npm --version
              cd bookStore
              ls
+             npx semantic-release --debug
 
    approval:
      docker:
