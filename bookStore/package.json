@@ -49,7 +49,7 @@
   "release": {
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
-      "dev-semantic-release",
+      "master",
       {
         "name": "dev-semantic-release",
         "prerelease": true
