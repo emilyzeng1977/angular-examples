@@ -48,10 +48,11 @@
   },
   "release": {
     "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
       "dev-semantic-release",
       {
         "name": "dev-semantic-release",
-        "prerelease": false
+        "prerelease": true
       }
     ]
   }
