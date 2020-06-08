@@ -48,10 +48,10 @@
   },
   "release": {
     "branches": [
-      "master",
+      "dev-semantic-release",
       {
         "name": "dev-semantic-release",
-        "prerelease": true
+        "prerelease": false
       }
     ]
   }
