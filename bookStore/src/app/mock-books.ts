@@ -1,4 +1,4 @@
-import { Book } from "./book";
+import { Book } from './book';
 
 export const BOOKS: Book[] = [
   { id: 11, name: 'Harry Potter', price: 50 },

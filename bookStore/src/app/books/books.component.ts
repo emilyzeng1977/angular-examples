@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from "../book";
-import { BOOKS } from "../mock-books";
-import {BookService} from "../book.service";
+import { Book } from '../book';
+import { BOOKS } from '../mock-books';
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-books',
