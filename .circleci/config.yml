@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   PrepareEnv:
     docker:
-      - image: circleci/openjdk:8-jdk-stretch-node-browsers
+      - image: circleci/python:3
     environment:
       GH_TOKEN: 17e396315d1e9961cbaa46afd2f100257990555
       REPO_ENC_KEY: 4826F5CA0F50D4EA265D5691C18B5691776ED1FB10C5DF73CE45614AF12AE0E1
@@ -32,16 +32,6 @@ jobs:
           npx semantic-release
           appVersion=$(cat ./package.json | jq -r '.version')
           echo ${appVersion}
-
-  DeployDevelop:
-    docker:
-      - image: circleci/python:3
-    environment:
-      GH_TOKEN: 17e396315d1e9961cbaa46afd2f100257990555
-      REPO_ENC_KEY: 4826F5CA0F50D4EA265D5691C18B5691776ED1FB10C5DF73CE45614AF12AE0E1
-      REPO_ENC_IV: 8BD9321FB88376E7944339FAA16A26C0
-    steps:
-      - checkout
 
 workflows:
   build-deploy:
