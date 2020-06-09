@@ -48,5 +48,5 @@ workflows:
     jobs:
       - PrepareEnv
       - DeployDevelop:
-        requires:
-          - PrepareEnv
+          requires:
+            - PrepareEnv
