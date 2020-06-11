@@ -30,7 +30,7 @@ jobs:
           command: |
             pwd
             ls -alt ~/
-            ls -alt ~/tmp/repo
+            ls -alt /tmp/repo
       - run:
           name: Decode ssh key for github
           command: |
