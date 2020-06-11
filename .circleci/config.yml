@@ -3,13 +3,13 @@ jobs:
   PrepareEnv:
     docker:
       - image: circleci/python:3
-    working_directory: ~/repo
+    working_directory: /tmp/repo
     steps:
       - checkout
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
-          root: ~/repo
+          root: /tmp/repo
           # Must be relative path from root
           paths:
             - '.'
@@ -22,12 +22,15 @@ jobs:
       REPO_ENC_KEY: 4826F5CA0F50D4EA265D5691C18B5691776ED1FB10C5DF73CE45614AF12AE0E1
       REPO_ENC_IV: 8BD9321FB88376E7944339FAA16A26C0
     steps:
-      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/repo
       - run:
           name: Check the current position
           command: |
             pwd
             ls -alt ~/
+            ls -alt ~/tmp/repo
       - run:
           name: Decode ssh key for github
           command: |
