@@ -10,19 +10,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run:
-          name: Decode ssh key for github
-          command: |
-            echo $GH_TOKEN
-            export GH_TOKEN=${GH_TOKEN}"7"
-            openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
-            chmod 600 /tmp/git_deploy_key
-            cat /tmp/git_deploy_key
-            cp config ~/.ssh/
-            ls -alt ~/.ssh/
-            echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
-            eval "$(ssh-agent -s)"
-            openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
@@ -38,6 +25,24 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
+      - run:
+          name: Check the current position
+          command: |
+            pwd
+            ls
+      - run:
+          name: Decode ssh key for github
+          command: |
+            echo $GH_TOKEN
+            export GH_TOKEN=${GH_TOKEN}"7"
+            openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
+            chmod 600 /tmp/git_deploy_key
+            cat /tmp/git_deploy_key
+            cp config ~/.ssh/
+            ls -alt ~/.ssh/
+            echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
+            eval "$(ssh-agent -s)"
+            openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
 
       - run:
           name: Update Build Version
