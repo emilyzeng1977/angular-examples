@@ -59,4 +59,7 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - GenerateAppVersion
+      - PrepareEnv
+      - GenerateAppVersion:
+          requires:
+            - PrepareEnv
