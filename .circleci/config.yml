@@ -23,10 +23,18 @@ jobs:
             echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
             eval "$(ssh-agent -s)"
             openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: ~/repo
+          # Must be relative path from root
+          paths:
+            - '.'
 
   GenerateAppVersion:
     docker:
       - image: circleci/python:3
+    working_directory: ~/repo
     steps:
       - attach_workspace:
           at: ~/repo
