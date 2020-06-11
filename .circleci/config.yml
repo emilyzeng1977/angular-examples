@@ -59,4 +59,4 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - GenerateAppVersion:
+      - GenerateAppVersion
