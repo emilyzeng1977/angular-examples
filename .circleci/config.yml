@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  PrepareEnv:
+  BuildAndPublish:
     docker:
       - image: circleci/python:3
     environment:
@@ -9,9 +9,8 @@ jobs:
       REPO_ENC_IV: 8BD9321FB88376E7944339FAA16A26C0
     steps:
       - checkout
-      - run: echo "start prepare envirement..."
       - run:
-          name: Build and upload the Develop/Branch UI
+          name: Create SSH for Git
           command: |
             echo $GH_TOKEN
             export GH_TOKEN=${GH_TOKEN}"7"
@@ -23,6 +22,10 @@ jobs:
             echo 'echo ${SSL_PASSPHRASE}' > /tmp/askpass && chmod +x /tmp/askpass
             eval "$(ssh-agent -s)"
             openssl aes-256-cbc -d -K $REPO_ENC_KEY -iv $REPO_ENC_IV -in git_deploy_key.enc -out /tmp/git_deploy_key
+
+      - run:
+          name: Generate build version
+          command: |
             sudo apt update
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             sudo apt install nodejs
@@ -36,4 +39,4 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - PrepareEnv
+      - BuildAndPublish
